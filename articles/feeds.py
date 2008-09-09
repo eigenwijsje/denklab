@@ -1,4 +1,4 @@
-# encoding: utf8
+# encoding: utf-8
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.syndication.feeds import Feed, FeedDoesNotExist
 
