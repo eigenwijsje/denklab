@@ -1,0 +1,26 @@
+{% extends "projects/base.html" %}
+
+{% load markup %}
+
+{% block title %}Proyectos | {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+<ul>
+    <li class="first"><a href="/">Inicio</a>
+        <ul>
+            <li>Proyectos
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main-content %}
+<h2>Proyectos</h2>
+
+{% for project in project_list %}
+<h3><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></h3>
+
+{{ project.summary|markdown }}
+{% endfor %}
+{% endblock %}

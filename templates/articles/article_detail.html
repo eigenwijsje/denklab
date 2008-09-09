@@ -1,0 +1,44 @@
+{% extends "articles/base.html" %}
+
+{% load markup %}
+
+{% block title %}{{ article.title }} | {{ block.super}}{% endblock %}
+
+{% block breadcrumb %}
+<ul>
+    <li class="first"><a href="/">Inicio</a>
+        <ul>
+            <li><a href="{% url article-list %}">Artículos</a>
+                <ul>
+                    <li>{{ article.title }}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main-content %}
+<h2>{{ article.title }}</h2>
+
+<h3>{{ article.published|date:"j F Y"|title }}</h3>
+
+{{ article.intro|markdown }}
+
+<hr noshade>
+
+{{ article.body|markdown }}
+{% endblock %}
+
+{% block side-content %}
+<h3>Categorías</h3>
+
+<ul>
+{% for category in article.categories.all %}
+    <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+        ({{ category.articles.count }})
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

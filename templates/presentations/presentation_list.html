@@ -1,0 +1,36 @@
+{% extends "presentations/base.html" %}
+
+{% load markup %}
+
+{% block title %}Presentaciones | {{ block.super }}{% endblock %}
+
+{% block extra-head %}
+<link rel="alternate" type="application/rss+xml" title="Presentaciones" href="/feeds/presentations/">
+{% endblock %}
+
+{% block breadcrumb %}
+<ul>
+    <li class="first"><a href="/">Inicio</a>
+        <ul>
+            <li>Presentaciones
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main-content %}
+<h2>Presentaciones</h2>
+
+{% for presentation in presentation_list %}
+<h3><a href="{{ presentation.get_absolute_url }}">{{ presentation.title }} {{ presentation.subtitle }}</a> ({{ presentation.presented|date:"F Y"|title }})</h3>
+{% endfor %}
+{% endblock %}
+
+{% block side-content %}
+<h3>Feed</h3>
+
+<ul>
+    <li><a href="feeds/presentations/">Presentaciones</a></li>
+</ul>
+{% endblock %}

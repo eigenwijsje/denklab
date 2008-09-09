@@ -1,0 +1,38 @@
+{% extends "articles/base.html" %}
+
+{% load markup %}
+
+{% block extra-head %}
+<link rel="alternate" type="application/rss+xml" title="Artículos" href="/feeds/articles/">
+{% endblock %}
+
+{% block title %}Artículos | {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+<ul>
+    <li class="first"><a href="/">Inicio</a>
+        <ul>
+            <li>Artículos
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main-content %}
+<h2>Artículos</h2>
+
+{% for article in article_list %}
+<h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a> ({{ article.published|date:"F Y"|title }})</h3>
+    
+{{ article.intro|markdown }}
+{% endfor %}
+{% endblock %}
+
+{% block side-content %}
+<h3>Feed</h3>
+
+<ul>
+    <li><a href="/feeds/articles/">Artículos</a></li>
+</ul>
+{% endblock %}

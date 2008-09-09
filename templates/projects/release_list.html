@@ -1,0 +1,30 @@
+{% extends "projects/base.html" %}
+
+{% block title %}{{ project.name }} | Releases | {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+<ul>
+    <li class="first"><a href="/">Inicio</a>
+        <ul>
+            <li><a href="{% url project-list %}">Proyectos</a>
+                <ul>
+                    <li><a href="{% url project-detail project.slug %}">{{ project.name }}</a>
+                        <ul>
+                            <li>Releases
+                            </li>
+                        <ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main-content %}
+<h2>{{ project.name }}: Releases</h2>
+
+{% for release in release_list %}
+<h3><a href="{{ release.get_absolute_url }}">{{ release.version }}</a></h3>
+{% endfor %}
+{% endblock %}

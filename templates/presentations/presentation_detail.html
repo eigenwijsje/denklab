@@ -1,0 +1,40 @@
+{% extends "presentations/base.html" %}
+
+{% load markup %}
+
+{% block title %}{{ presentation.title }} {{ presentation.subtitle }} | {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+<ul>
+    <li class="first"><a href="/">Inicio</a>
+        <ul>
+            <li><a href="{% url presentation-list %}">Presentaciones</a>
+                <ul>
+                    <li>{{ presentation.title }} {{ presentation.subtitle }}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main-content %}
+<h2>{{ presentation.title }} {{ presentation.subtitle }}</h2>
+
+<h3>{{ presentation.presented|date:"F Y"|title }}</h3>
+
+{{ presentation.notes|markdown }}
+{% endblock %}
+
+{% block side-content %}
+{% if presentation.resources.all %}
+<h2>Recursos</h2>
+
+<ul>
+    {% for resource in presentation.resources.all %}
+    <li> <a href="{{ resource.resource.url }}" title="{{ resource.description }}">{{ resource.description }}</a> ({{ resource.resource.size|filesizeformat }}) </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

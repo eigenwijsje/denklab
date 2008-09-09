@@ -1,0 +1,38 @@
+{% extends "articles/base.html" %}
+
+{% block extra-head %}
+<link rel="alternate" type="application/rss+xml" title="Artículos en la categoría &raquo;{{ category.name }}&laquo;" href="/feeds/articles/category/{{ category.slug }}/">
+{% endblock %}
+
+{% block title %}Artículos en la categoría &raquo;{{ category.name }}&laquo; | {{ block.super}}{% endblock %}
+
+{% block breadcrumb %}
+<ul>
+    <li class="first"><a href="/">Inicio</a>
+        <ul>
+            <li><a href="{% url article-list %}">Artículos</a>
+                <ul>
+                    <li>Artículos en la categoría &raquo;{{ category.name }}&laquo;
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main-content %}
+<h2>Artículos en la categoría &raquo;{{ category.name }}&laquo;</h2>
+
+{% for article in category.articles.all %}
+<h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a> ({{ article.published|date:"F Y"|title }})</h3>
+{% endfor %}
+{% endblock %}
+
+{% block side-content %}
+<h3>Feed</h3>
+
+<ul>
+    <li><a href="/feeds/articles/category/{{ category.slug }}/">Artículos en la categoría &raquo;{{ category.name }}&laquo;</a></li>
+</ul>
+{% endblock %}

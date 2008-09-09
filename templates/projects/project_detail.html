@@ -1,0 +1,56 @@
+{% extends "projects/base.html" %}
+
+{% load markup %}
+
+{% block title %}{{ project.name }} | {{ block.super }}{% endblock %}
+
+{% block breadcrumb %}
+<ul>
+    <li class="first"><a href="/">Inicio</a>
+        <ul>
+            <li><a href="{% url project-list %}">Proyectos</a>
+                <ul>
+                    <li>{{ project.name }}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main-content %}
+<h2>{{ project.name }}</h2>
+<h3>{{ project.summary }}</h3>
+
+{{ project.description|markdown }}
+
+{% if project.link %}
+<p>Enlace: {{ project.link|urlize }}</p>
+{% endif %}
+
+{% if project.blog %}
+<p>Blog: {{ project.blog|urlize }}</p>
+{% endif %}
+{% endblock %}
+
+{% block side-content %}
+{% if project.documents.all %}
+<h3>Documentos</h3>
+
+<ul>
+    {% for document in project.documents.all %}
+    <li><a href="{{ document.get_absolute_url }}">{{ document.title }} (r{{ document.revision }})</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if project.releases.all %}
+<h3>Releases</h3>
+<ul>
+    {% for release in project.releases.all %}
+    <li><a href="{{ release.get_absolute_url }}">{{ release.version }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
