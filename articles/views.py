@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render_to_response
 
-from denklab.articles.models import Article
+from models import Article
 
 def article_detail(request, year, month, slug):
     article = get_object_or_404(Article,

@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
+from django.views.generic.list_detail import object_list, object_detail
 
-from denklab.articles.models import Article, Category
+from models import Article, Category
+from views import article_detail
 
 article_info = {
     'queryset': Article.objects.all(),
@@ -12,19 +14,16 @@ category_info = {
     'template_object_name': 'category',
 }
 
-urlpatterns = patterns('django.views.generic.list_detail',
+urlpatterns = patterns('',
     url(r'^$',
-        'object_list',
+        object_list,
         article_info,
         name='article-list'),
     url(r'^category/(?P<slug>[\w-]+)/$',
-        'object_detail',
-        category_info,
+        object_detail,
+        dict(category_info, slug_field='slug'),
         name='category-detail'),
-)
-
-urlpatterns += patterns('denklab.articles.views',
     url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<slug>[\w-]+)/$',
-        'article_detail',
+        article_detail,
         name='article-detail'),
 )

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from denklab.articles.models import Article, Category
+from models import Article, Category
 
 class ArticleAdmin(admin.ModelAdmin):
     filter_horizontal = ('categories',)

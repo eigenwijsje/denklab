@@ -2,7 +2,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.syndication.feeds import Feed, FeedDoesNotExist
 
-from denklab.articles.models import Article, Category
+from models import Article, Category
 
 class ArticlesFeed(Feed):
     title = u'denkLab | Artículos'
@@ -23,7 +23,7 @@ class CategoryFeed(Feed):
         return Category.objects.get(slug=bits[0])
 
     def title(self, obj):
-        return u'denklab | Artículos en la categoría »%s«' % obj.name
+        return u'denkLab | Artículos en la categoría »%s«' % obj.name
 
     def link(self, obj):
         if not obj:
