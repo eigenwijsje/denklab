@@ -1,7 +1,7 @@
 # encoding: utf-8
 from django.contrib.syndication.feeds import Feed
 
-from denklab.presentations.models import Presentation
+from models import Presentation
 
 class PresentationsFeed(Feed):
     title = u'denkLab | Presentaciones'

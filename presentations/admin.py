@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from denklab.presentations.models import Presentation, Resource
+from models import Presentation, Resource
 
 class ResourceInline(admin.TabularInline):
     model = Resource
