@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from denklab.projects.models import Project, Release, Download, Link, Document
+from models import Project, Release, Download, Link, Document
 
 class DownloadInline(admin.TabularInline):
     model = Download

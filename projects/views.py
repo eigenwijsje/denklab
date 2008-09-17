@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render_to_response
 
-from denklab.projects.models import Project, Release, Document
+from models import Project, Release, Document
 
 def release_list(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug)
